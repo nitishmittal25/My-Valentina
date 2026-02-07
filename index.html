@@ -798,8 +798,8 @@
                 <div class="explosion">✨🎆✨</div>
             </div>
             
-            <p>I'm SO happy!! 💕</p>
-            <p>I can't wait to give you endless hugs 🤗🤗🤗</p>
+            <p>I'm SO happy to have you in my life!! 💕</p>
+            <p>Can't wait to give you endless hugs 🤗🤗🤗</p>
             <p>And shower you with kisses! 💋💋💋</p>
             <p>You mean the world to me, and I'm so lucky to have you! ❤️</p>
             <p><em>One more thing...</em></p>
@@ -1065,10 +1065,21 @@
             
             setTimeout(() => {
                 const segmentAngle = 360 / prizes.length;
-                const normalizedRotation = currentRotation % 360;
-                const adjustedRotation = (360 - normalizedRotation + 90) % 360;
-                const winningIndex = Math.floor(adjustedRotation / segmentAngle) % prizes.length;
-                const winningPrize = prizes[winningIndex];
+                // Normalize rotation to 0–360
+                const normalizedRotation = ((currentRotation % 360) + 360) % 360;
+
+                // Arrow is at 270deg (top)
+                const pointerAngle = 270;
+
+                // Find angle under arrow
+                const angleAtPointer = (pointerAngle - normalizedRotation + 360) % 360;
+
+                // Find winning segment
+                const winningIndex = Math.floor(angleAtPointer / segmentAngle);
+                //const normalizedRotation = currentRotation % 360;
+                //const adjustedRotation = (360 - normalizedRotation + 90) % 360;
+                //const winningIndex = Math.floor(adjustedRotation / segmentAngle) % prizes.length;
+                //const winningPrize = prizes[winningIndex];
                 
                 resultTitle.textContent = winningPrize.name + '!';
                 resultDescription.textContent = winningPrize.description;
@@ -1086,10 +1097,10 @@
         // To add your photos, replace the URLs below with your image URLs
         // You can upload photos to imgur.com or use GitHub to host them
         const photos = {
-            photo1: '', // Replace with your first photo URL
-            photo2: '', // Replace with your second photo URL
-            photo3: '', // Replace with your third photo URL
-            finalPhoto: '' // Replace with your final romantic photo URL
+            photo1: 'photo1.jpeg', // Replace with your first photo URL
+            photo2: 'photo2.jpeg', // Replace with your second photo URL
+            photo3: 'photo3.jpeg', // Replace with your third photo URL
+            finalPhoto: 'photo4.jpeg' // Replace with your final romantic photo URL
         };
 
         function loadPhotos() {
@@ -1139,7 +1150,7 @@
         
         function startMusic() {
             if (!musicStarted && music.src) {
-                music.volume = 0.3; // Set volume to 30%
+                music.volume = 0.6; // Set volume to 30%
                 music.play().catch(err => console.log('Music autoplay prevented'));
                 musicStarted = true;
             }
