@@ -166,6 +166,168 @@
             font-size: 4em;
         }
 
+        /* Roulette Wheel Page */
+        .wheel-page-container {
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .wheel-page-container h1 {
+            color: #C2185B;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .subtitle {
+            color: #880E4F;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto 30px;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        .wheel-segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+
+        .wheel-segment span {
+            position: absolute;
+            left: 65%;
+            top: 35%;
+            transform: rotate(22.5deg);
+            font-weight: bold;
+            font-size: 0.85em;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            width: 80px;
+            text-align: center;
+        }
+
+        .arrow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #ff1744;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            z-index: 10;
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 5;
+        }
+
+        .spin-button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .spin-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            min-height: 100px;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result h2 {
+            color: #c06c84;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        .result p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .next-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+        }
+
         @keyframes bounce {
             0%, 100% {
                 transform: translateY(0);
@@ -235,6 +397,16 @@
             font-size: 3.5em;
             margin-bottom: 30px;
             text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            animation: rainbow 3s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { color: #FF1744; }
+            20% { color: #FF6B9D; }
+            40% { color: #C2185B; }
+            60% { color: #880E4F; }
+            80% { color: #E91E63; }
+            100% { color: #FF1744; }
         }
 
         .celebration-container p {
@@ -244,15 +416,104 @@
             line-height: 1.8;
         }
 
-        .fireworks {
-            font-size: 4em;
-            margin: 30px 0;
-            animation: spin 2s linear infinite;
+        .celebration-effects {
+            position: relative;
+            min-height: 200px;
+            margin: 40px 0;
         }
 
-        @keyframes spin {
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            animation: floatUp 3s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
             100% {
-                transform: rotate(360deg);
+                transform: translateY(-200px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .explosion {
+            font-size: 4em;
+            animation: explode 1s ease-out infinite;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .bouncing-emojis {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .bouncing-emojis span {
+            animation: bounce 1s ease infinite;
+        }
+
+        .bouncing-emojis span:nth-child(1) { animation-delay: 0s; }
+        .bouncing-emojis span:nth-child(2) { animation-delay: 0.1s; }
+        .bouncing-emojis span:nth-child(3) { animation-delay: 0.2s; }
+        .bouncing-emojis span:nth-child(4) { animation-delay: 0.3s; }
+        .bouncing-emojis span:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(-10deg);
+            }
+            75% {
+                transform: translateY(-15px) rotate(10deg);
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 1.5em;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
             }
         }
 
@@ -389,6 +650,16 @@
                 font-size: 2em !important;
             }
 
+            .wheel-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .wheel-segment span {
+                font-size: 0.65em;
+                width: 60px;
+            }
+
             .button-container {
                 min-height: 200px;
             }
@@ -433,14 +704,51 @@
             <div class="hearts">💕 💖 💗 💝 💓 💘 💞</div>
             <p>To my amazing partner, my best friend, my everything...</p>
             <p>Every moment with you is a gift. Every hug, every kiss, every laugh we share makes my heart so full! 💋</p>
-            <p>You deserve all the love in the world! 🤗</p>
+            <p>I created this special experience just for you because you deserve all the love in the world! 🤗</p>
+            <p><strong>Let's start by picking an activity you'd like! 🎡</strong></p>
             <p><em>Sending you a million virtual hugs and kisses! 😘😘😘</em></p>
-            <button class="btn-primary" onclick="goToPage(2)">Let's Begin! ✨</button>
+            <button class="btn-primary" onclick="goToPage(2)">Pick An Activity! ✨</button>
         </div>
     </div>
 
-    <!-- Page 2: Will You Be My Valentine -->
+    <!-- Page 2: Roulette Wheel -->
     <div class="page" id="page2">
+        <div class="wheel-page-container">
+            <h1>💝 Pick Your Activity! 💝</h1>
+            <p class="subtitle">Spin the wheel to see what fun activity awaits!</p>
+            
+            <div class="wheel-container">
+                <div class="arrow"></div>
+                <div class="wheel" id="wheel"></div>
+                <div class="center-circle">❤️</div>
+            </div>
+            
+            <button class="spin-button" id="spinButton">SPIN THE WHEEL</button>
+            
+            <div class="result" id="result">
+                <h2 id="resultTitle"></h2>
+                <p id="resultDescription"></p>
+                <button class="next-button" onclick="goToPage(3)">But wait... 💕</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Here's the Truth -->
+    <div class="page" id="page3">
+        <div class="final-message-container">
+            <h1>💝 Here's the Truth... 💝</h1>
+            <div class="romantic-message">
+                <p class="big-message">You can have it all.</p>
+                <p class="bigger-message">But you and I pick each other</p>
+                <p class="biggest-message">every day, forever!! 💕</p>
+            </div>
+            <div class="hearts-animation">❤️ 💕 💖 💗 💝 💓 💘 💞</div>
+            <button class="btn-primary" onclick="goToPage(4)">Now I have a question... 💫</button>
+        </div>
+    </div>
+
+    <!-- Page 4: Will You Be My Valentine -->
+    <div class="page" id="page4">
         <div class="valentine-container">
             <h1>Will You Be My Valentine? 💕</h1>
             
@@ -462,42 +770,45 @@
             
             <div class="cute-image" id="emojiDisplay">😊💋</div>
             <div class="button-container">
-                <button class="btn-yes" onclick="goToPage(3)">YES! 💖</button>
+                <button class="btn-yes" onclick="goToPage(5)">YES! 💖</button>
                 <button class="btn-no" id="noButton">No</button>
             </div>
         </div>
     </div>
 
-    <!-- Page 3: Celebration -->
-    <div class="page" id="page3">
+    <!-- Page 5: Celebration -->
+    <div class="page" id="page5">
         <div class="celebration-container">
             <h1>🎉 YAYYY! 🎉</h1>
-            <div class="fireworks">🎆 ✨ 🎇 ✨ 🎆</div>
-            <p>I'm SO happy!💕</p>
+            
+            <div class="celebration-effects">
+                <!-- Floating hearts -->
+                <div class="floating-hearts" id="floatingHearts"></div>
+                
+                <!-- Bouncing emojis -->
+                <div class="bouncing-emojis">
+                    <span>🎊</span>
+                    <span>💕</span>
+                    <span>🎉</span>
+                    <span>💖</span>
+                    <span>🎊</span>
+                </div>
+                
+                <!-- Explosion effect -->
+                <div class="explosion">✨🎆✨</div>
+            </div>
+            
+            <p>I'm SO happy! You've made this the best Valentine's Day EVER! 💕</p>
             <p>I can't wait to give you endless hugs 🤗🤗🤗</p>
             <p>And shower you with kisses! 💋💋💋</p>
             <p>You mean the world to me, and I'm so lucky to have you! ❤️</p>
-            <p><em>Now, I have something important to tell you...</em></p>
-            <button class="btn-primary" onclick="goToPage(4)">Tell Me! 💕</button>
+            <p><em>One more thing...</em></p>
+            <button class="btn-primary" onclick="goToPage(6)">Show Me! 💞</button>
         </div>
     </div>
 
-    <!-- Page 4: Romantic Message -->
-    <div class="page" id="page4">
-        <div class="final-message-container">
-            <h1>💝 Here's the Truth... 💝</h1>
-            <div class="romantic-message">
-                <p class="big-message">You can have it all.</p>
-                <p class="bigger-message">But you and I pick each other</p>
-                <p class="biggest-message">every day, forever!! 💕</p>
-            </div>
-            <div class="hearts-animation">❤️ 💕 💖 💗 💝 💓 💘 💞</div>
-            <button class="btn-primary" onclick="goToPage(5)">One More Thing... 💫</button>
-        </div>
-    </div>
-
-    <!-- Page 5: Final Photo -->
-    <div class="page" id="page5">
+    <!-- Page 6: Final Photo -->
+    <div class="page" id="page6">
         <div class="final-photo-container">
             <h1>💕 Forever & Always 💕</h1>
             <div class="main-photo-frame">
@@ -517,9 +828,11 @@
             });
             document.getElementById('page' + pageNum).classList.add('active');
             
-            // Add confetti on celebration page
-            if (pageNum === 3) {
+            // Add confetti and effects on celebration page (now page 5)
+            if (pageNum === 5) {
                 createConfetti();
+                createFloatingHearts();
+                createSparkles();
             }
         }
 
@@ -540,6 +853,44 @@
             }
         }
 
+        // Floating Hearts Effect
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            const heartEmojis = ['❤️', '💕', '💖', '💗', '💝', '💓', '💘', '💞'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (2 + Math.random() * 2) + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+        }
+
+        // Sparkles Effect
+        function createSparkles() {
+            const container = document.querySelector('.celebration-container');
+            const sparkleEmojis = ['✨', '⭐', '🌟', '💫', '⚡'];
+            
+            setInterval(() => {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 80 + '%';
+                sparkle.style.animationDelay = Math.random() * 1 + 's';
+                
+                container.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 2000);
+            }, 500);
+        }
+
         // "No" Button Escape Logic
         const noButton = document.getElementById('noButton');
         const yesButton = document.querySelector('.btn-yes');
@@ -558,10 +909,10 @@
             noButton.style.transform = 'translateY(-50%)';
         }
         
-        // Call this when page 2 is shown
+        // Call this when page 4 (Will You Be My Valentine) is shown
         const observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
-                if (mutation.target.id === 'page2' && mutation.target.classList.contains('active')) {
+                if (mutation.target.id === 'page4' && mutation.target.classList.contains('active')) {
                     setTimeout(positionNoButton, 100);
                     // Reset emoji when page loads
                     emojiDisplay.textContent = '😊💋';
@@ -570,7 +921,7 @@
             });
         });
         
-        observer.observe(document.getElementById('page2'), { attributes: true, attributeFilter: ['class'] });
+        observer.observe(document.getElementById('page4'), { attributes: true, attributeFilter: ['class'] });
         
         // Make No button run away when mouse gets close
         function moveNoButton() {
@@ -602,6 +953,20 @@
             if (noButtonAttempts >= 5) emojiDisplay.textContent = '💔😭';
         }
         
+        // Change emoji back to happy when hovering over Yes button
+        yesButton.addEventListener('mouseover', function() {
+            if (noButtonAttempts > 0) {
+                emojiDisplay.textContent = '😍🥰';
+            }
+        });
+        
+        // Keep happy emoji when mouse leaves Yes button (if they already tried No)
+        yesButton.addEventListener('mouseout', function() {
+            if (noButtonAttempts > 0) {
+                emojiDisplay.textContent = '😊💋';
+            }
+        });
+        
         noButton.addEventListener('mouseover', moveNoButton);
         noButton.addEventListener('click', function(e) {
             e.preventDefault();
@@ -611,6 +976,111 @@
                 alert("Please... just click Yes! I promise I'll make you so happy! 🥺💕");
             }
         });
+
+        // Roulette Wheel Logic
+        const prizes = [
+            {
+                name: "Romantic Dinner",
+                description: "A candlelit dinner at your favorite restaurant (or I'll cook your favorite meal!)",
+                color: "#FF6B9D"
+            },
+            {
+                name: "Spa Day",
+                description: "A relaxing spa day for two - massages, facials, and pure relaxation!",
+                color: "#C06C84"
+            },
+            {
+                name: "Movie Marathon",
+                description: "Your choice of movies, popcorn, blankets, and unlimited cuddles!",
+                color: "#F67280"
+            },
+            {
+                name: "Weekend Getaway",
+                description: "A surprise weekend trip to somewhere special!",
+                color: "#355C7D"
+            },
+            {
+                name: "Love Letter",
+                description: "A handwritten love letter telling you all the reasons I love you!",
+                color: "#6C5B7B"
+            },
+            {
+                name: "Adventure Day",
+                description: "A fun outdoor adventure - hiking, beach day, or something exciting!",
+                color: "#99B898"
+            },
+            {
+                name: "Shopping Spree",
+                description: "A shopping date where you pick out anything you want!",
+                color: "#E84A5F"
+            },
+            {
+                name: "Breakfast in Bed",
+                description: "A week of breakfast in bed, made with love every morning!",
+                color: "#FF847C"
+            }
+        ];
+
+        const wheel = document.getElementById('wheel');
+        const spinButton = document.getElementById('spinButton');
+        const result = document.getElementById('result');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultDescription = document.getElementById('resultDescription');
+
+        let currentRotation = 0;
+        let isSpinning = false;
+
+        // Create wheel segments
+        function createWheel() {
+            const segmentAngle = 360 / prizes.length;
+            
+            prizes.forEach((prize, index) => {
+                const segment = document.createElement('div');
+                segment.className = 'wheel-segment';
+                segment.style.background = prize.color;
+                segment.style.transform = `rotate(${segmentAngle * index}deg)`;
+                
+                const text = document.createElement('span');
+                text.textContent = prize.name;
+                segment.appendChild(text);
+                
+                wheel.appendChild(segment);
+            });
+        }
+
+        // Spin the wheel
+        function spinWheel() {
+            if (isSpinning) return;
+            
+            isSpinning = true;
+            spinButton.disabled = true;
+            result.classList.remove('show');
+            
+            const spins = 5 + Math.random() * 5;
+            const randomAngle = Math.random() * 360;
+            const totalRotation = (spins * 360) + randomAngle;
+            
+            currentRotation += totalRotation;
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            setTimeout(() => {
+                const segmentAngle = 360 / prizes.length;
+                const normalizedRotation = currentRotation % 360;
+                const adjustedRotation = (360 - normalizedRotation + 90) % 360;
+                const winningIndex = Math.floor(adjustedRotation / segmentAngle) % prizes.length;
+                const winningPrize = prizes[winningIndex];
+                
+                resultTitle.textContent = winningPrize.name + '!';
+                resultDescription.textContent = winningPrize.description;
+                result.classList.add('show');
+                
+                isSpinning = false;
+                spinButton.disabled = false;
+            }, 4000);
+        }
+
+        spinButton.addEventListener('click', spinWheel);
+        createWheel();
 
         // Photo Loading Function
         // To add your photos, replace the URLs below with your image URLs
