@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Valentine's Message 💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FFE4E1 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .page.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Page */
+        .welcome-container {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .welcome-container h1 {
+            color: #C2185B;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .welcome-container p {
+            color: #880E4F;
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hearts {
+            font-size: 3em;
+            margin: 30px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Valentine Question Page */
+        .valentine-container {
+            text-align: center;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .valentine-container h1 {
+            color: #C2185B;
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .cute-image {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            font-size: 150px;
+            animation: bounce 1s infinite;
+        }
+
+        .photo-gallery {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            border: 5px solid white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder {
+            color: #ccc;
+            font-size: 4em;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .button-container {
+            margin-top: 50px;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px;
+            position: relative;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.8em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: left 0.3s ease, top 0.3s ease;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .btn-no:hover {
+            transform: scale(1.05);
+        }
+
+        /* Celebration Page */
+        .celebration-container {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .celebration-container h1 {
+            color: #C2185B;
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .celebration-container p {
+            color: #880E4F;
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .fireworks {
+            font-size: 4em;
+            margin: 30px 0;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Romantic Message Page */
+        .final-message-container {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .final-message-container h1 {
+            color: #C2185B;
+            font-size: 3em;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .romantic-message {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin: 30px 0;
+        }
+
+        .big-message {
+            color: #C2185B;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .bigger-message {
+            color: #880E4F;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .biggest-message {
+            color: #C2185B;
+            font-size: 3em;
+            font-weight: bold;
+            margin-top: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        .hearts-animation {
+            font-size: 3em;
+            margin: 40px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Final Photo Page */
+        .final-photo-container {
+            text-align: center;
+            max-width: 700px;
+        }
+
+        .final-photo-container h1 {
+            color: #C2185B;
+            font-size: 3.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .main-photo-frame {
+            width: 500px;
+            height: 500px;
+            max-width: 90vw;
+            max-height: 50vh;
+            border: 8px solid white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 40px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .main-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .final-words {
+            color: #880E4F;
+            font-size: 1.8em;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background: rgba(194, 24, 91, 0.2);
+            color: #C2185B;
+            border: 2px solid #C2185B;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #C2185B;
+            color: white;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 2em !important;
+            }
+
+            .button-container {
+                min-height: 200px;
+            }
+            
+            .btn-yes, .btn-no {
+                padding: 15px 30px;
+                font-size: 1.2em;
+            }
+
+            .romantic-message {
+                padding: 30px 20px;
+            }
+
+            .big-message {
+                font-size: 1.5em;
+            }
+
+            .bigger-message {
+                font-size: 1.8em;
+            }
+
+            .biggest-message {
+                font-size: 2em;
+            }
+
+            .main-photo-frame {
+                width: 90vw;
+                height: 90vw;
+            }
+
+            .final-words {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Welcome -->
+    <div class="page active" id="page1">
+        <div class="welcome-container">
+            <h1>💝 Happy Valentine's Day! 💝</h1>
+            <div class="hearts">💕 💖 💗 💝 💓 💘 💞</div>
+            <p>To my amazing partner, my best friend, my everything...</p>
+            <p>Every moment with you is a gift. Every hug, every kiss, every laugh we share makes my heart so full! 💋</p>
+            <p>I created this special experience just for you because you deserve all the love in the world! 🤗</p>
+            <p><em>Sending you a million virtual hugs and kisses! 😘😘😘</em></p>
+            <button class="btn-primary" onclick="goToPage(2)">Let's Begin! ✨</button>
+        </div>
+    </div>
+
+    <!-- Page 2: Will You Be My Valentine -->
+    <div class="page" id="page2">
+        <div class="valentine-container">
+            <h1>Will You Be My Valentine? 💕</h1>
+            
+            <!-- Photo Gallery -->
+            <div class="photo-gallery">
+                <div class="photo-frame">
+                    <img id="photo1" src="" alt="Us" style="display:none;">
+                    <span class="photo-placeholder" id="placeholder1">📷</span>
+                </div>
+                <div class="photo-frame">
+                    <img id="photo2" src="" alt="Us" style="display:none;">
+                    <span class="photo-placeholder" id="placeholder2">📷</span>
+                </div>
+                <div class="photo-frame">
+                    <img id="photo3" src="" alt="Us" style="display:none;">
+                    <span class="photo-placeholder" id="placeholder3">📷</span>
+                </div>
+            </div>
+            
+            <div class="cute-image" id="emojiDisplay">😊💋</div>
+            <div class="button-container">
+                <button class="btn-yes" onclick="goToPage(3)">YES! 💖</button>
+                <button class="btn-no" id="noButton">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Celebration -->
+    <div class="page" id="page3">
+        <div class="celebration-container">
+            <h1>🎉 YAYYY! 🎉</h1>
+            <div class="fireworks">🎆 ✨ 🎇 ✨ 🎆</div>
+            <p>I'm SO happy! You've made this the best Valentine's Day EVER! 💕</p>
+            <p>I can't wait to give you endless hugs 🤗🤗🤗</p>
+            <p>And shower you with kisses! 💋💋💋</p>
+            <p>You mean the world to me, and I'm so lucky to have you! ❤️</p>
+            <p><em>Now, I have something important to tell you...</em></p>
+            <button class="btn-primary" onclick="goToPage(4)">Tell Me! 💕</button>
+        </div>
+    </div>
+
+    <!-- Page 4: Romantic Message -->
+    <div class="page" id="page4">
+        <div class="final-message-container">
+            <h1>💝 Here's the Truth... 💝</h1>
+            <div class="romantic-message">
+                <p class="big-message">You can have it all.</p>
+                <p class="bigger-message">But you and I pick each other</p>
+                <p class="biggest-message">every day, forever!! 💕</p>
+            </div>
+            <div class="hearts-animation">❤️ 💕 💖 💗 💝 💓 💘 💞</div>
+            <button class="btn-primary" onclick="goToPage(5)">One More Thing... 💫</button>
+        </div>
+    </div>
+
+    <!-- Page 5: Final Photo -->
+    <div class="page" id="page5">
+        <div class="final-photo-container">
+            <h1>💕 Forever & Always 💕</h1>
+            <div class="main-photo-frame">
+                <img id="finalPhoto" src="" alt="Us Together" style="display:none;">
+                <span class="photo-placeholder" id="finalPlaceholder">📷</span>
+            </div>
+            <p class="final-words">Every moment with you is the best time of my life! ❤️</p>
+            <p class="final-words">I love you more than words can say! 💋</p>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        function goToPage(pageNum) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('page' + pageNum).classList.add('active');
+            
+            // Add confetti on celebration page
+            if (pageNum === 3) {
+                createConfetti();
+            }
+        }
+
+        // Confetti Effect
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#c06c84', '#f67280', '#355c7d', '#99b898', '#e84a5f'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        // "No" Button Escape Logic
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.querySelector('.btn-yes');
+        const emojiDisplay = document.getElementById('emojiDisplay');
+        let noButtonAttempts = 0;
+        
+        // Position No button initially to the right of Yes button
+        function positionNoButton() {
+            const container = document.querySelector('.button-container');
+            const containerRect = container.getBoundingClientRect();
+            const yesRect = yesButton.getBoundingClientRect();
+            
+            // Position No button to the right of Yes
+            noButton.style.left = (yesRect.right - containerRect.left + 30) + 'px';
+            noButton.style.top = '50%';
+            noButton.style.transform = 'translateY(-50%)';
+        }
+        
+        // Call this when page 2 is shown
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.id === 'page2' && mutation.target.classList.contains('active')) {
+                    setTimeout(positionNoButton, 100);
+                    // Reset emoji when page loads
+                    emojiDisplay.textContent = '😊💋';
+                    noButtonAttempts = 0;
+                }
+            });
+        });
+        
+        observer.observe(document.getElementById('page2'), { attributes: true, attributeFilter: ['class'] });
+        
+        // Make No button run away when mouse gets close
+        function moveNoButton() {
+            const container = document.querySelector('.button-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // Random position within safe bounds
+            const maxX = containerRect.width - 200;
+            const maxY = containerRect.height - 80;
+            
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            
+            noButton.style.left = x + 'px';
+            noButton.style.top = y + 'px';
+            noButton.style.transform = 'none';
+            
+            // Make Yes button bigger
+            const currentSize = parseFloat(getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = Math.min(currentSize + 4, 50) + 'px';
+            
+            noButtonAttempts++;
+            
+            // Change emoji based on attempts - from happy/kissing to sad/broken heart
+            if (noButtonAttempts === 1) emojiDisplay.textContent = '🥺';
+            if (noButtonAttempts === 2) emojiDisplay.textContent = '😢';
+            if (noButtonAttempts === 3) emojiDisplay.textContent = '😭';
+            if (noButtonAttempts === 4) emojiDisplay.textContent = '💔';
+            if (noButtonAttempts >= 5) emojiDisplay.textContent = '💔😭';
+        }
+        
+        noButton.addEventListener('mouseover', moveNoButton);
+        noButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            moveNoButton();
+            
+            if (noButtonAttempts >= 5) {
+                alert("Please... just click Yes! I promise I'll make you so happy! 🥺💕");
+            }
+        });
+
+        // Photo Loading Function
+        // To add your photos, replace the URLs below with your image URLs
+        // You can upload photos to imgur.com or use GitHub to host them
+        const photos = {
+            photo1: '', // Replace with your first photo URL
+            photo2: '', // Replace with your second photo URL
+            photo3: '', // Replace with your third photo URL
+            finalPhoto: '' // Replace with your final romantic photo URL
+        };
+
+        function loadPhotos() {
+            // Load gallery photos
+            for (let i = 1; i <= 3; i++) {
+                const photoKey = 'photo' + i;
+                const img = document.getElementById(photoKey);
+                const placeholder = document.getElementById('placeholder' + i);
+                
+                if (photos[photoKey] && img && placeholder) {
+                    img.src = photos[photoKey];
+                    img.style.display = 'block';
+                    placeholder.style.display = 'none';
+                }
+            }
+
+            // Load final photo
+            const finalImg = document.getElementById('finalPhoto');
+            const finalPlaceholder = document.getElementById('finalPlaceholder');
+            
+            if (photos.finalPhoto && finalImg && finalPlaceholder) {
+                finalImg.src = photos.finalPhoto;
+                finalImg.style.display = 'block';
+                finalPlaceholder.style.display = 'none';
+            }
+        }
+
+        // Load photos when page loads
+        loadPhotos();
+    </script>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="" type="audio/mpeg">
+        <!-- To add the song:
+             1. Download "Good Riddance (Time of Your Life)" by Green Day as an MP3
+             2. Upload it to your GitHub repository (name it: song.mp3)
+             3. Replace the empty src="" above with: src="song.mp3"
+             OR use a direct link to the song hosted online
+        -->
+    </audio>
+
+    <script>
+        // Auto-play music when user interacts with the page
+        let musicStarted = false;
+        const music = document.getElementById('backgroundMusic');
+        
+        function startMusic() {
+            if (!musicStarted && music.src) {
+                music.volume = 0.3; // Set volume to 30%
+                music.play().catch(err => console.log('Music autoplay prevented'));
+                musicStarted = true;
+            }
+        }
+
+        // Start music on first click anywhere
+        document.addEventListener('click', startMusic, { once: true });
+    </script>
+</body>
+</html>
