@@ -972,7 +972,7 @@
             e.preventDefault();
             moveNoButton();
             
-            if (noButtonAttempts >= 3) {
+            if (noButtonAttempts >= 5) {
                 alert("Please... Yessss! I promise I'll make you so happy! 🥺💕");
             }
         });
@@ -980,33 +980,33 @@
         // Roulette Wheel Logic
         const prizes = [
             {
-                name: "Romantic Dinner",
-                description: "A candlelit dinner at your favorite restaurant (or I'll cook your favorite meal!)",
+                name: "Intimate but classy",
+                description: "That is definitely you! Similarly you have this quiet way of making me chosen and loved every single day)",
                 color: "#FF6B9D"
             },
             {
-                name: "Spa Day",
-                description: "A relaxing spa day for two - massages, facials, and pure relaxation!",
+                name: "Quite care",
+                description: "You probably don't think about it twice. But the way you take care of me is amazing. You make the ordinary extraordinary!",
                 color: "#C06C84"
             },
             {
-                name: "Movie Marathon",
-                description: "Your choice of movies, popcorn, blankets, and unlimited cuddles!",
+                name: "Truth",
+                description: "You are the hottest, sexiest, prettiest, kindest and you do that everyday",
                 color: "#F67280"
             },
             {
-                name: "Weekend Getaway",
-                description: "A surprise weekend trip to somewhere special!",
+                name: "First moment",
+                description: "We met on 2nd Feb: The day I knew I wanted more of you everyday. Thank you for making that happen",
                 color: "#355C7D"
             },
             {
                 name: "Love Letter",
-                description: "A handwritten love letter telling you all the reasons I love you!",
+                description: "The only letter I am writing this year. Official confirmation: My wife is always right today, always and beyond :P",
                 color: "#6C5B7B"
             },
             {
-                name: "Adventure Day",
-                description: "A fun outdoor adventure - hiking, beach day, or something exciting!",
+                name: "Subscription",
+                description: "Lifetime access to me heart. No cancellations and no refunds. Only in kisses, hugs and ;) ",
                 color: "#99B898"
             },
             {
@@ -1066,19 +1066,19 @@
             setTimeout(() => {
                 const segmentAngle = 360 / prizes.length;
                 // Normalize rotation to 0–360
-                const normalizedRotation = ((currentRotation % 360) + 360) % 360;
+                //const normalizedRotation = ((currentRotation % 360)
 
                 // Arrow is at 270deg (top)
-                const pointerAngle = 270;
+                //const pointerAngle = 270;
 
                 // Find angle under arrow
-                const angleAtPointer = (pointerAngle - normalizedRotation + 360) % 360;
+                //const angleAtPointer = (pointerAngle - normalizedRotation + 360) % 360;
 
                 // Find winning segment
-                const winningIndex = Math.floor(angleAtPointer / segmentAngle);
-                //const normalizedRotation = currentRotation % 360;
-                //const adjustedRotation = (360 - normalizedRotation + 90) % 360;
-                //const winningIndex = Math.floor(adjustedRotation / segmentAngle) % prizes.length;
+                //const winningIndex = Math.floor(angleAtPointer / segmentAngle);
+                const normalizedRotation = currentRotation % 360;
+                const adjustedRotation = (360 - normalizedRotation + 270) % 360;
+                const winningIndex = Math.floor(adjustedRotation / segmentAngle) % prizes.length;
                 const winningPrize = prizes[winningIndex];
                 
                 resultTitle.textContent = winningPrize.name + '!';
