@@ -1006,17 +1006,19 @@
             },
             {
                 name: "Subscription",
-                description: "Lifetime access to me heart. No cancellations and no refunds. Only in kisses, hugs and ;) ",
+                description: "Lifetime access to me heart. No cancellations and no refunds. Only in kisse and hugs) ",
                 color: "#99B898"
             },
             {
-                name: "Shopping Spree",
-                description: "A shopping date where you pick out anything you want!",
+                name: "Flirt with me",
+                description: "If you are with me, who is running heaven? If ever the heaven got lost, they will just have to then come to me. If ever I got lost, they will find me in your knees",
                 color: "#E84A5F"
             },
             {
-                name: "Breakfast in Bed",
-                description: "A week of breakfast in bed, made with love every morning!",
+                name: "Something about your husband",
+                description: "I must have done something incredibly right,
+To have a gold medal like you in my sight.
+I clearly hit the jackpot and won the first prize",
                 color: "#FF847C"
             }
         ];
@@ -1077,7 +1079,7 @@
                 // Find winning segment
                 //const winningIndex = Math.floor(angleAtPointer / segmentAngle);
                 const normalizedRotation = currentRotation % 360;
-                const adjustedRotation = (360 - normalizedRotation + 270) % 360;
+                const adjustedRotation = (360 - normalizedRotation + 0) % 360;
                 const winningIndex = Math.floor(adjustedRotation / segmentAngle) % prizes.length;
                 const winningPrize = prizes[winningIndex];
                 
