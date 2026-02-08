@@ -1016,9 +1016,7 @@
             },
             {
                 name: "Your husband",
-                description: "I must have done something incredibly right,
-To have a gold medal like you in my sight.
-I clearly hit the jackpot and won the first prize",
+                description: "I must have done something incredibly right, To have a gold medal like you in my sight. I clearly hit the jackpot and won the first prize",
                 color: "#FF847C"
             }
         ];
@@ -1079,7 +1077,7 @@ I clearly hit the jackpot and won the first prize",
                 // Find winning segment
                 //const winningIndex = Math.floor(angleAtPointer / segmentAngle);
                 const normalizedRotation = currentRotation % 360;
-                const adjustedRotation = (360 - normalizedRotation + 10) % 360;
+                const adjustedRotation = (360 - normalizedRotation + 270) % 360;
                 const winningIndex = Math.floor(adjustedRotation / segmentAngle) % prizes.length;
                 const winningPrize = prizes[winningIndex];
                 
@@ -1152,7 +1150,7 @@ I clearly hit the jackpot and won the first prize",
         
         function startMusic() {
             if (!musicStarted && music.src) {
-                music.volume = 0.9; // Set volume to 30%
+                music.volume = 0.3; // Set volume to 30%
                 music.play().catch(err => console.log('Music autoplay prevented'));
                 musicStarted = true;
             }
