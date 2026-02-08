@@ -1077,7 +1077,7 @@
                 // Find winning segment
                 //const winningIndex = Math.floor(angleAtPointer / segmentAngle);
                 const normalizedRotation = currentRotation % 360;
-                const adjustedRotation = (360 - normalizedRotation + 0) % 360;
+                const adjustedRotation = normalizedRotation;
                 const winningIndex = Math.floor(adjustedRotation / segmentAngle) % prizes.length;
                 const winningPrize = prizes[winningIndex];
                 
