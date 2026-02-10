@@ -1133,35 +1133,45 @@
      
     </script>
 
-<script>
-        // Music functionality - Auto-play attempt
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Music functionality
         const music = document.getElementById('backgroundMusic');
         let musicPlaying = false;
 
         if (music) {
-            music.volume = 0.6; // 30% volume
+            music.volume = 0.8; // 30% volume
             
-            // Try to auto-play immediately when page loads
-            music.play()
-                .then(() => {
-                    musicPlaying = true;
-                    console.log('Music auto-played successfully!');
-                })
-                .catch(err => {
-                    console.log('Auto-play blocked, waiting for user interaction');
-                    
-                    // Fallback: play on first click if auto-play blocked
-                    document.addEventListener('click', function() {
-                        if (!musicPlaying) {
-                            music.play()
-                                .then(() => {
-                                    musicPlaying = true;
-                                    console.log('Music started after click!');
-                                })
-                                .catch(e => console.log('Music error:', e));
-                        }
-                    }, { once: true });
-                });
+            // Try to play music on any user interaction
+            function tryPlayMusic() {
+                if (!musicPlaying) {
+                    music.play()
+                        .then(() => {
+                            musicPlaying = true;
+                            console.log('Music started!');
+                        })
+                        .catch(err => {
+                            console.log('Music blocked by browser:', err);
+                        });
+                }
+            }
+            
+            // Listen for first click
+            document.addEventListener('click', tryPlayMusic, { once: true });
+            
+            // Also try on button clicks (backup)
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName === 'BUTTON') {
+                    tryPlayMusic();
+                }
+            });
+        } else {
+            console.log('Audio element not found - check if song.mp3 exists');
         }
     </script>
  
